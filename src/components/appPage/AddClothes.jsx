@@ -18,27 +18,28 @@ function AddClothes() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('dressName', dressName);
-    formData.append('dressType', dressType);
-    formData.append('color', color);
-    formData.append('season', season);
-    formData.append('description', description);
-    formData.append('lastWornDate', lastWornDate);
-    formData.append('imageFile', imageFile);
-    formData.append('imageName', imageFile.name); // Add the image file name
-
+  
     try {
+      const formData = new FormData();
+      formData.append('dressName', dressName);
+      formData.append('dressType', dressType);
+      formData.append('color', color);
+      formData.append('season', season);
+      formData.append('description', description);
+      formData.append('lastWornDate', lastWornDate);
+      formData.append('imageFile', imageFile);
+      formData.append('imageName', imageFile.name); // Add the image file name
+  
       let res;
+  
       if (dressType === 'tops') {
         res = await axios.post(`${API_URL}/tops`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-      } else if (dressType === 'phants') {
-        res = await axios.post(`${API_URL}/phants`, formData, {
+      } else if (dressType === 'pants') {
+        res = await axios.post(`${API_URL}/pants`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -50,12 +51,15 @@ function AddClothes() {
           },
         });
       }
-
-      if (res) {
+  
+      if (res && res.data) {
         toast.success(res.data.message || 'New Dress Added Successfully');
         navigate('/dashboard/collection');
+      } else {
+        toast.error('Failed to add dress. Please try again.');
       }
-      // Clear form fields after successful submission
+  
+      // Reset form fields after successful submission
       setDressName('');
       setDressType('');
       setColor('');
@@ -155,7 +159,7 @@ function AddClothes() {
 
           <div className="form-group">
             <label htmlFor="imageFile">Upload Image:</label>
-            <input type="file" accept="image/*" className="form-control" onChange={handleFileChange} required />
+            <input type="file" accept="image/*" className="form-control" onChange={handleFileChange}/>
             <small>Upload a plain background image for better view</small>
           </div>
 
