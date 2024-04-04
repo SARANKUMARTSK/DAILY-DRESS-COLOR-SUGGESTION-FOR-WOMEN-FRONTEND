@@ -1,8 +1,4 @@
 [[redirects]]
 
-from:"/landing-page/*"
-to:"/landing-page"
-
-from:"/dashboard/*"
-to:"/dashboard/home"
-
+from:"/*"
+to:"/index.html"
