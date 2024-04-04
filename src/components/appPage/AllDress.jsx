@@ -97,7 +97,7 @@ const handleEdit = async(e)=>{
           <>
             {phants.map((e, i) => (
               <div key={i} className="list-container col-xl-2 col-md-5 mb-4 container-fluid">
-                <img src={`/src/images/${e.imageFile}`} alt={e.dressName}/>
+                <img src={`${API_URL}/images/${e.imageFile}`} alt={e.dressName}/>
                 <div className="dress_data">
                   <p>
                     Name : <br />
@@ -124,7 +124,7 @@ const handleEdit = async(e)=>{
             ))}
             {tshirt.map((e, i) => (
               <div key={i} className="list-container col-xl-2 col-md-5 mb-4 container-fluid">
-                <img src={`/src/images/${e.imageFile}`} alt={e.dressName}/>
+                <img src={`${API_URL}/images/${e.imageFile}`} alt={e.dressName}/>
                 <div className="dress_data">
                   <p>
                     Name : <br />
@@ -149,7 +149,7 @@ const handleEdit = async(e)=>{
             ))}
             {tops.map((e, i) => (
               <div key={i} className="list-container col-xl-2 col-md-5 mb-4 container-fluid">
-                <img src={`/src/images/${e.imageFile}`} alt={e.dressName}/>
+                <img src={`${API_URL}/images/${e.imageFile}`} alt={e.dressName}/>
                 <div className="dress_data">
                   <p>
                     Name : <br />
