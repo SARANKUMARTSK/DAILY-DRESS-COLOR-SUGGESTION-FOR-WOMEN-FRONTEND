@@ -25,16 +25,20 @@ function Phants() {
         navigate(`/dashboard/edit-clothes/${e._id}`)
     }
 
-    const handleDelete=async(e)=>{
-        let res = await axios.delete(`${API_URL}/phants/${e._id}`)
-        toast.success(res.data.message||"Deleted Successfully")
-        getPhantData();
-    }
+    const handleDelete = async (e) => {
+        try {
+            let res = await axios.delete(`${API_URL}/phants/${e._id}`);
+            toast.success(res.data.message || "Deleted Successfully");
+            getPhantData(); 
+        } catch (error) {
+            console.error("Error deleting item:", error);
+        }
+    };
+    
+    useEffect(() => {
+        getPhantData(); 
+    }, []);
 
-
-    useEffect(()=>{
-        getPhantData()
-    },[])
   return <>
   <div className="list-page">
             <div className='alighn-end'>

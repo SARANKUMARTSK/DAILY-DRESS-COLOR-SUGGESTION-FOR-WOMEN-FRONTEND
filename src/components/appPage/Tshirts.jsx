@@ -27,7 +27,7 @@ function List() {
     }
 
     const handleDelete=async(e)=>{
-        let res = await axios.delete(`${API_URL}/tshirts/${e._id}`)
+        let res = await axios.delete(`${API_URL}/tShirts/${e._id}`)
         toast.success(res.data.message||"Deleted Successfully")
         getData();
     }
