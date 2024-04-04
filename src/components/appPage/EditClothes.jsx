@@ -252,7 +252,7 @@ function EditClothes() {
               </button>
               <button
                 className="show_button"
-                onClick={() => navigate("/dashboard/collections")}
+                onClick={() => navigate("/dashboard/collection")}
               >
                 Discard
               </button>

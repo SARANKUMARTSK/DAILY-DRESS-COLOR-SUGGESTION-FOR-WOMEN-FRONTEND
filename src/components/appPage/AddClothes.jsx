@@ -164,7 +164,7 @@ function AddClothes() {
 
           <div className='button-container'>
             <button type="submit" className="show_button">Submit</button>
-            <button className='show_button' onClick={() => navigate('/dashboard/collections')}>Discard</button>
+            <button className='show_button' onClick={() => navigate('/dashboard/collection')}>Discard</button>
           </div>
           </div>
         </form>
