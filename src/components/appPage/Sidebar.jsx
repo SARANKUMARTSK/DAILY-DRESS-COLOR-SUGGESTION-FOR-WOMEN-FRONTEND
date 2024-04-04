@@ -24,7 +24,7 @@ function Sidebar() {
             <hr className="sidebar-divider my-0"/>
 
       
-            <li onClick={()=>navigate('/dashboard/home')} className="nav-item active">
+            <li onClick={()=>navigate('home')} className="nav-item active">
                 <a className="nav-link" href="index.html">
                       <DashboardCustomizeIcon/>
                       &nbsp;   <span > Dashboard</span></a>
