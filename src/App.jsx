@@ -21,7 +21,7 @@ import EditDate from './components/appPage/EditDate'
 import Users from './components/appPage/Users'
 import EditUser from './components/appPage/EditUser'
 import AddDate from './components/appPage/AddDate'
-export const API_URL = 'https://daily-dress-color-suggestion-for-women-q32v.onrender.com'
+export const API_URL = 'http://localhost:8000'
 
 
 function App() {

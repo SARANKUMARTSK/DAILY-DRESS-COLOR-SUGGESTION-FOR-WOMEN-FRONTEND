@@ -34,7 +34,7 @@ function List() {
 
     useEffect(()=>{
         getData()
-    },[tshirt])
+    },[])
   return <>
  <div className="list-page">
             <div className='alighn-end'>
@@ -45,7 +45,7 @@ function List() {
                 {tshirt.length > 0 ? (
                     tshirt.map((e, i) => (
                         <div key={i} className="list-container col-xl-2 col-md-5 mb-4  container-fluid">
-                            <img src={`/src/images/${e.imageFile}`} alt={e.dressName} height='100px' width="100px"/>
+                            <img src={`${API_URL}/images/${e.imageFile}`} alt={e.dressName}/>
                             <div className='dress_data'>
                                 <p>Name : <br/><span>{`${e.dressName}`}</span></p>
                                 <p>Type : <br/><span>{`${e.dressType}`}</span></p>

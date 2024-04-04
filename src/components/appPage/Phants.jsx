@@ -34,7 +34,7 @@ function Phants() {
 
     useEffect(()=>{
         getPhantData()
-    },[phants])
+    },[])
   return <>
   <div className="list-page">
             <div className='alighn-end'>
@@ -45,7 +45,7 @@ function Phants() {
                 {phants.length > 0 ? (
                     phants.map((e, i) => (
                         <div key={i} className="list-container col-xl-2 col-md-5 mb-4  container-fluid">
-                            <img src={`/src/images/${e.imageFile}`} alt={e.dressName}/>
+                            <img src={`${API_URL}/images/${e.imageFile}`} alt={e.dressName}/>
                             <div className='dress_data'>
                                 <p>Name : <br/><span>{`${e.dressName}`}</span></p>
                                 <p>Type : <br/><span>{`${e.dressType}`}</span></p>

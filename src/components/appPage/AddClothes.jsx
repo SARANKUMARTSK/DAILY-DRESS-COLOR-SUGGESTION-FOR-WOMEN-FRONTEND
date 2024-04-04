@@ -14,8 +14,6 @@ function AddClothes() {
   const [season , setSeason] = useState('');
   const navigate = useNavigate();
  
-  // console.log(dressType);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -28,23 +26,24 @@ function AddClothes() {
       formData.append('description', description);
       formData.append('lastWornDate', lastWornDate);
       formData.append('imageFile', imageFile);
-      formData.append('imageName', imageFile.name); // Add the image file name
-  
+      formData.append('imageName', imageFile ? imageFile.name : '');
+ 
       let res;
-  
       if (dressType === 'tops') {
         res = await axios.post(`${API_URL}/tops`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-      } else if (dressType === 'pants') {
-        res = await axios.post(`${API_URL}/pants`, formData, {
+       } 
+        if (dressType === 'phants') {
+        res = await axios.post(`${API_URL}/phants`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-      } else if (dressType === 'tShirts') {
+      }
+       if (dressType === 'tShirts') {
         res = await axios.post(`${API_URL}/tShirts`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -54,19 +53,19 @@ function AddClothes() {
   
       if (res && res.data) {
         toast.success(res.data.message || 'New Dress Added Successfully');
+        setDressName('');
+        setDressType('');
+        setColor('');
+        setSeason('');
+        setDescription('');
+        setLastWornDate('');
+        setImageFile(null);
         navigate('/dashboard/collection');
       } else {
         toast.error('Failed to add dress. Please try again.');
+        console.log(error);
       }
   
-      // Reset form fields after successful submission
-      setDressName('');
-      setDressType('');
-      setColor('');
-      setSeason('');
-      setDescription('');
-      setLastWornDate('');
-      setImageFile(null);
     } catch (error) {
       console.error('Error adding dress:', error);
       toast.error('Error adding dress. Please try again.');
