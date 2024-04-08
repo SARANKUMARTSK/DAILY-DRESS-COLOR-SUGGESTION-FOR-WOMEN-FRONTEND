@@ -24,7 +24,7 @@ import AddDate from './components/appPage/AddDate'
 import EditSuggestion from './components/appPage/EditSuggestion'
 import ActionColor from './components/appPage/ActionColor'
 import AddColor from './components/appPage/AddColor'
-export const API_URL = 'http://localhost:8000'
+export const API_URL = 'https://daily-dress-color-suggestion-for-women-89bk.onrender.com'
 
 
 function App() {
