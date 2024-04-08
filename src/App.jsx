@@ -21,7 +21,10 @@ import EditDate from './components/appPage/EditDate'
 import Users from './components/appPage/Users'
 import EditUser from './components/appPage/EditUser'
 import AddDate from './components/appPage/AddDate'
-export const API_URL = 'https://daily-dress-color-suggestion-for-women-89bk.onrender.com'
+import EditSuggestion from './components/appPage/EditSuggestion'
+import ActionColor from './components/appPage/ActionColor'
+import AddColor from './components/appPage/AddColor'
+export const API_URL = 'http://localhost:8000'
 
 
 function App() {
@@ -41,8 +44,15 @@ function App() {
     {/* Main App Page  */}
     <Route path='/dashboard' element={<Dashboard/>}>
       <Route path='home' element={<Home/>}/>
+
       <Route path='color-suggestion' element={<ColorSuggestion/>}/>
       <Route path='seasonal-suggestion' element={<SeasonChoice/>}/>
+      <Route path='action-color' element={<ActionColor/>}/>
+      <Route path='add-color' element={<AddColor/>}/>
+      <Route path='edit-suggestion/:id' element={<EditSuggestion/>}/>
+
+
+
       <Route path='collection' element={<Collections/>}/>
       <Route path='all-dresses' element={<AllDress/>}/>
       <Route path='tops' element={<Tops/>}/>
@@ -50,8 +60,9 @@ function App() {
       <Route path='tShirts' element={<Tshirts/>}/>
       <Route path='add-clothes' element={<AddClothes/>}/>
       <Route path='edit-clothes/:id' element={<EditClothes/>}/>
+
+
       <Route path='edit-date/:id' element={<EditDate/>}/>
-       
       <Route path='event' element={<Events/>}/>
       <Route path='add-event' element={<AddDate/>}/>
 

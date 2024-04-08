@@ -14,10 +14,15 @@ import toast from "react-hot-toast";
 function Events() {
 
   let [data, setData] = useState([]);
+  let token = sessionStorage.getItem("token");
 
   const getDates = async () => {
     try {
-      let res = await axios.get(`${API_URL}/dates`);
+      let res = await axios.get(`${API_URL}/dates`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       let values = res.data.dates.map((dateObj) => {
         const date = new Date(dateObj.date);
         const formattedDate = `${date.getDate()}-${date.toLocaleString(
@@ -38,7 +43,11 @@ function Events() {
 
   const deleteDate = async(data)=>{
     try {
-      let res = await axios.delete(`${API_URL}/dates/${data._id}`)
+      let res = await axios.delete(`${API_URL}/dates/${data._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      })
       getDates()
       toast.success(res.data.message||"Deleted Successfull")
 

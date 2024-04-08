@@ -7,10 +7,15 @@ import toast from 'react-hot-toast';
 function Tops() {
     const navigate = useNavigate();
     let [tops,setTops] = useState([])
+    let token = sessionStorage.getItem("token");
     
     const getData = async () => {
         try {
-            let res = await axios.get(`${API_URL}/tops`);
+            let res = await axios.get(`${API_URL}/tops`, {
+                headers: {
+                  Authorization: `Bearer ${token}` 
+                }
+              });
             let values = res.data.tops.map((dateObj) => { 
                 const date = new Date(dateObj.lastWornDate);
                 const formattedDate = date.toLocaleString();
@@ -29,7 +34,11 @@ function Tops() {
     }
 
     const handleDelete=async(e)=>{
-        let res = await axios.delete(`${API_URL}/tops/${e._id}`)
+        let res = await axios.delete(`${API_URL}/tops/${e._id}`, {
+            headers: {
+              Authorization: `Bearer ${token}` 
+            }
+          })
         toast.success(res.data.message||"Deleted Successfully")
         getData();
     }

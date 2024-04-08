@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 function Users() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  let token = sessionStorage.getItem("token");
 
   useEffect(() => {
     getUsers();
@@ -27,7 +28,11 @@ function Users() {
 
   const deleteUser = async (id) => {
     try {
-      const res = await axios.delete(`${API_URL}/user/delete-user/${id}`);
+      const res = await axios.delete(`${API_URL}/user/delete-user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       await getUsers(); 
       toast.success(res.data.message || "Deleted Successfully");
     } catch (error) {

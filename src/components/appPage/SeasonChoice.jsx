@@ -27,6 +27,16 @@ function SeasonChoice() {
     useEffect(()=>{
         getData()
     },[])
+
+    const handleEditSuggestion = (e)=>{
+      console.log(e);
+      // navigate('/dashboard/edit-suggestion')
+     }
+
+
+
+
+
   return <>
   <div className='season-suggestion'>
     <div className='season-suggestion-container'>
@@ -58,7 +68,7 @@ function SeasonChoice() {
              }
              {
                 weather==="winter"?winter.map((e,i)=>{
-                    return  <div key={i} className='suggestions' style={{backgroundColor:e.color}}><span>{e.color}</span></div>
+                    return  <div key={i} className='suggestions' style={{backgroundColor:e.color}}  ><span>{e.color}</span></div>
                 }):""
              }
              {

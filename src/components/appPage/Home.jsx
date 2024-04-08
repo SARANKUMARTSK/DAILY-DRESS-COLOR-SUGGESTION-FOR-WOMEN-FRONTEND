@@ -4,6 +4,8 @@ import Chart from "./Chart";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import { API_URL } from "../../App";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Home() {
   const [colorData, setColorData] = useState([]);
@@ -13,7 +15,9 @@ function Home() {
   const [phants, setPhants] = useState(0);
   const [tshirt, setTshirt] = useState(0);
   const [color , setColor] = useState('')
-
+  let token = sessionStorage.getItem("token");
+  
+  const navigate = useNavigate()
   useEffect(() => {
     getColor();
     getPhantData();
@@ -51,7 +55,11 @@ function Home() {
 
   const getPhantData = async () => {
     try {
-      let res = await axios.get(`${API_URL}/phants`);
+      let res = await axios.get(`${API_URL}/phants`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       let values = res.data.phants.map((dateObj) => ({
         ...dateObj,
         lastWornDate: new Date(dateObj.lastWornDate).toLocaleString(),
@@ -64,7 +72,11 @@ function Home() {
 
   const getTshirtData = async () => {
     try {
-      let res = await axios.get(`${API_URL}/tShirts`);
+      let res = await axios.get(`${API_URL}/tShirts`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       let values = res.data.tShirt.map((dateObj) => ({
         ...dateObj,
         lastWornDate: new Date(dateObj.lastWornDate).toLocaleString(),
@@ -77,7 +89,11 @@ function Home() {
 
   const getTopsData = async () => {
     try {
-      let res = await axios.get(`${API_URL}/tops`);
+      let res = await axios.get(`${API_URL}/tops`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       let values = res.data.tops.map((dateObj) => ({
         ...dateObj,
         lastWornDate: new Date(dateObj.lastWornDate).toLocaleString(),
@@ -90,7 +106,11 @@ function Home() {
 
   const fetchDateData = async () => {
     try {
-      const res = await axios.get(`${API_URL}/dates`);
+      const res = await axios.get(`${API_URL}/dates`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       const data = res.data.dates.map((date) => ({
         ...date,
         dayOfWeek: new Date(date.date).toLocaleDateString("en-US", {
@@ -113,25 +133,21 @@ function Home() {
   let data = [
     {
       type: "Collections",
-      qty: 100,
       image:
         "https://static.vecteezy.com/system/resources/previews/032/425/160/original/collection-of-cute-women-dresses-colorful-flat-cartoon-style-hand-drawing-illustration-free-vector.jpg",
     },
     {
       type: "Top",
-      qty: 20,
       image:
         "https://rukminim2.flixcart.com/image/850/1000/xif0q/dress/j/o/h/m-women-s-color-dress-fancy-rudra-collection-original-imagqwwqzn44gjum.jpeg?q=90&crop=false",
     },
     {
       type: "Phant",
-      qty: "15",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3YajOEn5ZV6P3iku8GrIXfWsFE0cyBR6ejCi6xrsDGoKwVBDo7XJXA6B0InLcqA9uYQk&usqp=CAU",
     },
     {
       type: "T-Shirt",
-      qty: "18",
       image:
         "https://i.etsystatic.com/41134919/r/il/ae75ea/4659503368/il_570xN.4659503368_inc4.jpg",
     },
@@ -228,27 +244,56 @@ function Home() {
                 <EditCalendarIcon />
                 &nbsp;&nbsp;Up Coming Events
               </h6>
-              {dateData.map((e, i) => (
-                <div key={i} className="upcoming-event-container">
-                  <div className="event-date-image">
-                    <div>
-                      <span>{e.dayOfWeek}</span>
-                      <span>
-                        {e.dayOfMonth}/{e.month}
-                      </span>
+              
+              {dateData.length?
+                dateData.map((e, i) => (
+                  <div key={i} className="upcoming-event-container">
+                    <div className="event-date-image">
+                      <div>
+                        <span>{e.dayOfWeek}</span>
+                        <span>
+                          {e.dayOfMonth}/{e.month}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="event-content">
+                      <div>
+                        <ul>
+                          <li>Event : {e.event}</li>
+                          <li>Dress : {e.dress}</li>
+                          <li>Place : {e.place}</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  <div className="event-content">
-                    <div>
-                      <ul>
-                        <li>Event : {e.event}</li>
-                        <li>Dress : {e.dress}</li>
-                        <li>Place : {e.place}</li>
-                      </ul>
+                )):(
+                  <div className='empty_message'>
+                      <p>Your Event is Empty...</p>
+                      <div  className="upcoming-event-container">
+                    <div className="event-date-image">
+                      <div>
+                        <span>No Dates</span>
+                        <span>
+                          
+                        </span>
+                      </div>
+                    </div>
+                    <div className="event-content">
+                      <div>
+                        <ul>
+                          <li>Event : Empty </li>
+                          <li>Dress : Empty</li>
+                          <li>Place : Empty</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                  Click Here To Add Event
+                  <p onClick={()=>navigate('dashboard/add-event')}></p>
+                  </div>
+                 
+              )
+              }
             </div>
           </div>
         </div>

@@ -1,12 +1,14 @@
 import React,{useState , useEffect} from "react";
 import { API_URL } from '../../App';
 import axios from 'axios'
-
+import './app.css'
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import {useNavigate} from 'react-router-dom'
 function ColorSuggestion() {
 
     const [suggestion, setSuggestion] = useState([]);
     const [color, setColor] = useState('skyblue');
-
+    const navigate = useNavigate()
   const handleColorSelect = (e) => {
     const selectedColor = e.target.value;
     setColor(selectedColor);
@@ -19,7 +21,6 @@ let getData = async () => {
       let selectedColorData = data.find((colors) => colors.color === color);
       if (selectedColorData) {
           setSuggestion(selectedColorData.matches);
-          console.log(selectedColorData.matches);
       } else {
           console.log(`No matches found for color: ${color}`);
           setSuggestion([]);
@@ -33,14 +34,24 @@ useEffect(() => {
   getData();
 }, [color]); 
 
+
+   
+
   return (
     <>
+        
       <div className="color-suggestion">
+      
         <div className="suggestion-container">
+        
+        
+
           <div className="base-color">
+            
             <div className="base-content">
               <h5>Choose Your Base Color and get good matches</h5>
             </div>
+            
             <div className="suggestions" style={{ backgroundColor: color }}></div>
             <select name="color" className={`${color=="black"?"white":"black"}`} style={{ backgroundColor: color }} value={color} onChange={handleColorSelect}>
             <option value="plum">Plum</option>
@@ -68,6 +79,8 @@ useEffect(() => {
             <option value="olive">Olive Green</option>
             <option value="peru">Peru</option>
             </select>
+
+            
 
           </div>
            

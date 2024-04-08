@@ -6,6 +6,7 @@ import { API_URL } from "../../App";
 
 function EditClothes() {
   const [existingImage, setExistingImage] = useState("");
+  let token = sessionStorage.getItem("token");
 
   const [dressName, setDressName] = useState("");
   const [dressType, setDressType] = useState("");
@@ -20,7 +21,11 @@ function EditClothes() {
 
   const fetchTopData = async () => {
     try {
-      let res = await axios.get(`${API_URL}/tops/${id}`);
+      let res = await axios.get(`${API_URL}/tops/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       if (res && res.data && res.data.top) {
         let data = res.data.top;
         setDressName(data.dressName);
@@ -36,7 +41,11 @@ function EditClothes() {
         return;
       }
   
-      res = await axios.get(`${API_URL}/phants/${id}`);
+      res = await axios.get(`${API_URL}/phants/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       if (res && res.data && res.data.phant) {
         let data = res.data.phant;
         setDressName(data.dressName);
@@ -52,7 +61,11 @@ function EditClothes() {
         return;
       }
   
-      res = await axios.get(`${API_URL}/tShirts/${id}`);
+      res = await axios.get(`${API_URL}/tShirts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       if (res && res.data && res.data.tShirt) {
         let data = res.data.tShirt;
         setDressName(data.dressName);
@@ -99,13 +112,15 @@ function EditClothes() {
          res = await axios.put(`${API_URL}/tops/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+            Authorization: `Bearer ${token}`
+          }
         });
       }
       else if(dressType === 'phants'){
          res = await axios.put(`${API_URL}/phants/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
           },
         });
       }
@@ -113,6 +128,7 @@ function EditClothes() {
          res = await axios.put(`${API_URL}/tShirts/${id}`, formData, {
           headers: {  
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
           },
         });
       }

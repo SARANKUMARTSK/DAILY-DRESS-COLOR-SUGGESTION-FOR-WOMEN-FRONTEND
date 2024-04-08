@@ -6,10 +6,15 @@ import { API_URL } from '../../App';
 function List() {
     const navigate = useNavigate();
     let [tshirt,setTshirt] = useState([])
+    let token = sessionStorage.getItem("token");
 
     const getData = async () => {
         try {
-            let res = await axios.get(`${API_URL}/tShirts`);
+            let res = await axios.get(`${API_URL}/tShirts`, {
+                headers: {
+                  Authorization: `Bearer ${token}` 
+                }
+              });
             console.log(res.data);
             let values = res.data.tShirt.map((dateObj) => { 
                 const date = new Date(dateObj.lastWornDate);
@@ -23,11 +28,19 @@ function List() {
     };
 
     const handleEdit = async(e)=>{
-        navigate(`/dashboard/edit-clothes/${e._id}`)
+        navigate(`/dashboard/edit-clothes/${e._id}`, {
+            headers: {
+              Authorization: `Bearer ${token}` 
+            }
+          })
     }
 
     const handleDelete=async(e)=>{
-        let res = await axios.delete(`${API_URL}/tShirts/${e._id}`)
+        let res = await axios.delete(`${API_URL}/tShirts/${e._id}`, {
+            headers: {
+              Authorization: `Bearer ${token}` 
+            }
+          })
         toast.success(res.data.message||"Deleted Successfully")
         getData();
     }

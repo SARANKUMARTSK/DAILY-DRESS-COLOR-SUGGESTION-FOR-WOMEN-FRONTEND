@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './auth.css'
@@ -22,7 +22,6 @@ function SignIn() {
       };
       if (formData.email && formData.password) {
         let res = await axios.post(`${API_URL}/user/signin`, formData);
-        console.log(res.data);
         if (res.status === 200) {
           sessionStorage.setItem("token", res.data.token);
           sessionStorage.setItem("name", res.data.name);

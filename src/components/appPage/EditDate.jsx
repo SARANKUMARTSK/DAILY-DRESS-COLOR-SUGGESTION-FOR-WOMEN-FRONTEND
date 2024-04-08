@@ -12,10 +12,15 @@ function EditDate() {
   const [event, setEvent] = useState("");
   const [dress, setDress] = useState("");
   const [place, setPlace] = useState("");
+  let token = sessionStorage.getItem("token");
 
   const fetchDate = async () => {
     try {
-      const response = await axios.get(`${API_URL}/dates/${id}`);
+      const response = await axios.get(`${API_URL}/dates/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       const { date, event, dress, place } = response.data.date;
       setDate(new Date(date).toISOString().split('T')[0]);
       setEvent(event);
@@ -45,7 +50,11 @@ function EditDate() {
     
   
     try {
-      const res = await axios.put(`${API_URL}/dates/${id}`, formData);
+      const res = await axios.put(`${API_URL}/dates/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       console.log("Date edited successfully:", res.data);
       toast.success("Date Edited Successfully");
       navigate('/dashboard/home');

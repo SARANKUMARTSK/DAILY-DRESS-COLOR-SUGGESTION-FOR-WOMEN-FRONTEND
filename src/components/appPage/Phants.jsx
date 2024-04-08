@@ -6,10 +6,15 @@ import { API_URL } from '../../App';
 function Phants() {
     const navigate = useNavigate();
     let [phants,setPhants] = useState([])
+    let token = sessionStorage.getItem("token");
 
     const getPhantData = async () => {
         try {
-            let res = await axios.get(`${API_URL}/phants`);
+            let res = await axios.get(`${API_URL}/phants`, {
+                headers: {
+                  Authorization: `Bearer ${token}` 
+                }
+              });
             let values = res.data.phants.map((dateObj) => { 
                 const date = new Date(dateObj.lastWornDate);
                 const formattedDate = date.toLocaleString();
@@ -22,12 +27,20 @@ function Phants() {
     };
 
     const handleEdit = async(e)=>{
-        navigate(`/dashboard/edit-clothes/${e._id}`)
+        navigate(`/dashboard/edit-clothes/${e._id}`, {
+            headers: {
+              Authorization: `Bearer ${token}` 
+            }
+          })
     }
 
     const handleDelete = async (e) => {
         try {
-            let res = await axios.delete(`${API_URL}/phants/${e._id}`);
+            let res = await axios.delete(`${API_URL}/phants/${e._id}`, {
+                headers: {
+                  Authorization: `Bearer ${token}` 
+                }
+              });
             toast.success(res.data.message || "Deleted Successfully");
             getPhantData(); 
         } catch (error) {

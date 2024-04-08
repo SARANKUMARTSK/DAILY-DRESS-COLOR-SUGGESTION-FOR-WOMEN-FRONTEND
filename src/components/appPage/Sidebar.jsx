@@ -6,6 +6,7 @@ import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import PersonIcon from '@mui/icons-material/Person';
+import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
 import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
@@ -78,13 +79,26 @@ function Sidebar() {
                 </a> 
             </li>
 
+           
           {
-            sessionStorage.getItem("role")==="admin"?<li className="nav-item" onClick={()=>navigate('users')}>
-            <a className="nav-link collapsed">
-            <PersonIcon/>
-               &nbsp; <span>Users</span>
-            </a> 
-        </li>:""
+            sessionStorage.getItem("role")==="admin"?<div>
+                 <div className="sidebar-heading">
+                ADMIN
+            </div>
+                <li className="nav-item" onClick={()=>navigate('users')}>
+                    <a className="nav-link collapsed">
+                    <PersonIcon/>
+                    &nbsp; <span>Users</span>
+                    </a> 
+               </li>
+
+               <li className="nav-item" onClick={()=>navigate('action-color')}>
+                    <a className="nav-link collapsed">
+                    <FormatColorFillIcon/>
+                    &nbsp; <span>Manage Colors</span>
+                    </a> 
+               </li>
+            </div>:""
           }
             
 

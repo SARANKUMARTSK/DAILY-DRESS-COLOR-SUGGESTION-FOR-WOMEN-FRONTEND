@@ -9,10 +9,15 @@ function AllDress() {
     let [phants,setPhants] = useState([])
     let [tshirt,setTshirt] = useState([])
     let [tops,setTops] = useState([])
+    let token = sessionStorage.getItem("token");
 
     const getPhantData = async () => {
       try {
-        let res = await axios.get(`${API_URL}/phants`);
+        let res = await axios.get(`${API_URL}/phants`, {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
+        });
         let values = res.data.phants.map((dateObj) => { 
             const date = new Date(dateObj.lastWornDate);
             const formattedDate = date.toLocaleString();
@@ -27,7 +32,11 @@ function AllDress() {
 
     const getTshirtData = async()=>{
       try {
-        let res = await axios.get(`${API_URL}/tShirts`);
+        let res = await axios.get(`${API_URL}/tShirts`, {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
+        });
         console.log(res.data);
         let values = res.data.tShirt.map((dateObj) => { 
             const date = new Date(dateObj.lastWornDate);
@@ -42,7 +51,11 @@ function AllDress() {
 
   const getTopsData = async()=>{
     try {
-      let res = await axios.get(`${API_URL}/tops`);
+      let res = await axios.get(`${API_URL}/tops`, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      });
       let values = res.data.tops.map((dateObj) => { 
           const date = new Date(dateObj.lastWornDate);
           const formattedDate = date.toLocaleString();
@@ -56,13 +69,25 @@ function AllDress() {
     
 const handleDelete = async (e) => {
   if (e.dressType === 'tops') {
-    await axios.delete(`${API_URL}/tops/${e._id}`);
+    await axios.delete(`${API_URL}/tops/${e._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
     getTopsData();
   } else if (e.dressType === 'phant') {
-    await axios.delete(`${API_URL}/phants/${e._id}`);
+    await axios.delete(`${API_URL}/phants/${e._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
     getPhantData();
   } else if (e.dressType === 'tshirt') {
-    await axios.delete(`${API_URL}/tShirts/${e._id}`);
+    await axios.delete(`${API_URL}/tShirts/${e._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
     getTshirtData();
   } else {
     toast.error("Wrong Path");

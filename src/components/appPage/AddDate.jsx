@@ -10,6 +10,7 @@ function AddDate() {
   let [event,setEvent]= useState("");
   let [dress,setDress]=useState("")
   let [place,setPlace]=useState("")
+  let token = sessionStorage.getItem("token");
 
   const navigate = useNavigate();
   const handleAddDate = async(e)=>{
@@ -20,7 +21,11 @@ function AddDate() {
     if(!date||!event||!dress){
       toast.error("Please Fill All The Fields")
     }else{
-      let res = await axios.post(`${API_URL}/dates`,formData)
+      let res = await axios.post(`${API_URL}/dates`,formData, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      })
     toast.success("Date Added Successfull")
     navigate('/dashboard/home')
     }

@@ -9,6 +9,7 @@ function EditUser() {
   let [name , setName] = useState('')
   let [email , setEmail] = useState('')
   let [role , setRole] = useState('')
+  let token = sessionStorage.getItem("token");
 
   const navigate = useNavigate()
 
@@ -31,7 +32,11 @@ function EditUser() {
       let data = {
         name , email , role
       }
-      let res = await axios.put(`${API_URL}/user/edit-user/${id}`,data)
+      let res = await axios.put(`${API_URL}/user/edit-user/${id}`,data, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      })
       
       toast.success(res.data.message||"User Data Edited Successfully")
 

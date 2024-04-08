@@ -13,6 +13,7 @@ function AddClothes() {
   const [imageFile, setImageFile] = useState(null);
   const [season , setSeason] = useState('');
   const navigate = useNavigate();
+  let token = sessionStorage.getItem("token");
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ function AddClothes() {
         res = await axios.post(`${API_URL}/tops`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
           },
         });
        } 
@@ -40,6 +42,7 @@ function AddClothes() {
         res = await axios.post(`${API_URL}/phants`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
           },
         });
       }
@@ -47,6 +50,7 @@ function AddClothes() {
         res = await axios.post(`${API_URL}/tShirts`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
           },
         });
       }
