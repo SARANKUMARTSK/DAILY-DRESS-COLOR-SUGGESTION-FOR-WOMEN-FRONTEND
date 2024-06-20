@@ -3,9 +3,7 @@
 # Daily Dress Color Suggestion For Women
 
 # Overview
-         Daily Dress Color Suggestion For Women is a MERN stack application designed to provide dress color 
-suggestions based on seasons, colors, and daily randomness. It features CRUD operations, JWT for user authentication
-and authorization, bcrypt for password hashing, and multer for image uploading. The application supports two roles: Admin and User.
+         Daily Dress Color Suggestion For Women is a MERN stack application designed to provide dress color suggestions based on seasons, colors, and daily randomness. It features CRUD operations, JWT for user authentication and authorization, bcrypt for password hashing, and multer for image uploading. The application supports two roles: Admin and User.
 
 # Roles and Permissions
 
